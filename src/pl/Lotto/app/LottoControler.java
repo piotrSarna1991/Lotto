@@ -29,6 +29,7 @@ public class LottoControler implements Serializable {
     private LocalDateTime date = LocalDateTime.now();
 
 
+
     public static int getMaxNumberValue() {
         return maxNumberValue;
     }
@@ -131,13 +132,6 @@ public class LottoControler implements Serializable {
 
     }
 
-    public List<Integer> GetLottoResult() {
-        return lottoResult;
-    }
-
-    public List<Integer> GetLottoUserTypes() {
-        return lottoUserTypes;
-    }
 
 
     private void randomize() {
