@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoResultStore implements Serializable {
+public class LottoResultsStore implements Serializable {
     private List<Integer> typesStore;
     private List <Integer> resultStore;
     private int result;
     private static final long serialVersionUID = 3957894669835000258L;
-    public LottoResultStore(List<Integer> typesStore, List<Integer> resultStore, int result) {
+    public LottoResultsStore(List<Integer> typesStore, List<Integer> resultStore, int result) {
         this.typesStore = typesStore;
         this.resultStore = resultStore;
         this.result = result;

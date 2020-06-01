@@ -1,12 +1,11 @@
 package pl.Lotto.io.file;
 
-import pl.Lotto.app.LottoControler;
 import pl.Lotto.io.ConsolePrinter;
-import pl.Lotto.io.LottoResultStore;
+import pl.Lotto.io.LottoGame;
+import pl.Lotto.io.LottoResultsStore;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class CsvFileManager {
 
     public List<Integer> readTypesFromFile() {
         List<Integer> userNumbers = new ArrayList<>();
-        LottoControler lotto = new LottoControler();
+        LottoGame game = new LottoGame();
         try (FileReader fileReader = new FileReader(TAKE_NUMBERS_FROM_USER);
              BufferedReader reader = new BufferedReader(fileReader);
         ) {
@@ -30,7 +29,7 @@ public class CsvFileManager {
             while ((nextLine = reader.readLine()) != null) {
 
                 int nextNumber = Integer.parseInt(nextLine);
-                if (nextNumber <= lotto.getMaxNumberValue()) {
+                if (nextNumber <= game.getMaxNumberValue()) {
                     userNumbers.add(nextNumber);
                 } else {
                     printer.printText("Wprowadzono niepoprawną liczbę");
@@ -43,8 +42,8 @@ public class CsvFileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        lotto.lottoUserTypes = userNumbers;
-        return lotto.lottoUserTypes;
+        game.lottoUserTypes = userNumbers;
+        return game.lottoUserTypes;
     }
 
     public void importData() {
@@ -63,7 +62,7 @@ public class CsvFileManager {
     }
 
 
-    public void exportData(Map<LocalDateTime,LottoResultStore> map) {
+    public void exportData(Map<LocalDateTime, LottoResultsStore> map) {
 
         try (
                 var fileWriter = new FileWriter(SAVE_RESULTS_FILE, true);

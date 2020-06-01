@@ -1,7 +1,6 @@
 package pl.Lotto.io.file;
 
-import pl.Lotto.app.LottoControler;
-import pl.Lotto.io.LottoResultStore;
+import pl.Lotto.io.LottoResultsStore;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -9,13 +8,13 @@ import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-public class FileManagerBuilder implements FileManager {
+public class SerializableFileManager implements FileManager {
 
 
     private final String FILE_NAME2 = "Results.o";
 
 
-    public void exportData(Map<LocalDateTime,LottoResultStore> map) {
+    public void exportData(Map<LocalDateTime, LottoResultsStore> map) {
         try (var fos = new FileOutputStream(FILE_NAME2);
              var os = new ObjectOutputStream(fos);) {
             os.writeObject(map);
@@ -28,11 +27,11 @@ public class FileManagerBuilder implements FileManager {
         }
     }
 
-    public Map<LocalDateTime,LottoResultStore> importData() {
-        Map<LocalDateTime,LottoResultStore> map = new HashMap<>();
+    public Map<LocalDateTime, LottoResultsStore> importData() {
+        Map<LocalDateTime, LottoResultsStore> map = new HashMap<>();
         try (var fis = new FileInputStream(FILE_NAME2);
              var ois = new ObjectInputStream(fis);) {
-            map= (HashMap<LocalDateTime, LottoResultStore>) ois.readObject();
+            map= (HashMap) ois.readObject();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -41,6 +40,7 @@ public class FileManagerBuilder implements FileManager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return map;
 
     }
