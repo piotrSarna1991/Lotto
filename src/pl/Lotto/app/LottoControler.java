@@ -37,16 +37,16 @@ public class LottoControler implements Serializable {
             printer.printText("Wybierz opcję");
             options = getOption();
             switch (options) {
-                case FILE:
+                case READ_NUMBERS_FROM_FILE:
                     take(csvFileManager.readTypesFromFile());
                     break;
-                case USER:
+                case READ_NUMBERS_FROM_USER:
                     take(game.typeNumbers());
                     break;
-                case PRINT_RESULTS:
+                case PRINT_RESULTS_FROM_CSV:
                     printResultsFromCsvFile();
                     break;
-                case PRINT_FROM_SERIAL:
+                case PRINT_RESULTS_FROM_SERIAL:
                     printResultsFromSerial();
                     break;
                 case EXIT:
@@ -118,12 +118,12 @@ public class LottoControler implements Serializable {
 
 
     public enum Options {
+        EXIT(0, " - Wyjdź z programu"),
+        READ_NUMBERS_FROM_FILE(1, " - Wprowadź liczby z pliku"),
+        READ_NUMBERS_FROM_USER(2, " - Wprowadź liczby od użytkownika"),
+        PRINT_RESULTS_FROM_CSV(3, " - Wyświetl wszystkie wyniki z pliku CSV"),
+        PRINT_RESULTS_FROM_SERIAL(4, " - Wyświetl wszystkkie wyniki z pliku serial");
 
-        FILE(0, " - Pobierz liczby z pliku"),
-        USER(1, " - Wprowadź liczby od użytkownika"),
-        PRINT_RESULTS(2, " - Wyświetl wszystkie wyniki"),
-        PRINT_FROM_SERIAL(3, " - Wyświetl wyniki z serialize"),
-        EXIT(4, " - Wyjdź z programu");
 
         private int value;
         private String description;
